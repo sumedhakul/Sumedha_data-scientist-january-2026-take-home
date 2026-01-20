@@ -69,7 +69,7 @@ We'll be looking at:
 - Creativity in Approach: How effectively did you identify potential action items?
 - Prompt Design: Is your LLM prompt structured to handle edge cases?
 - Code Quality & Documentation: The readability, efficiency, and structure of your prototype code and its accompanying comments.
-- Product Thinking: Did you handle different types of tasks (e.g., self-commitment vs. delegation)?
+- Product Thinking: Did you handle different types of tasks (e.g., self-commitment vs. delegation)? Did you think about how this could be integrated with task management solutions (e.g. Linear)? Did you think about what data could be beneficial to the user beyond the raw task description (e.g. title, description, assignee, priority)? Did you make sure the data is relevant to the user (e.g. task from the past that has been inidcated as done is irrelevant; a relevance score might be beneficial)?
 - Methodology & Communication: Your ability to break down a problem into logical steps and communicate your work clearly through your commit history and RFC.
 
 ## 8. Submission
