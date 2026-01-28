@@ -1,4 +1,4 @@
-# RFC: [Your Proposed Title for the Project]
+# RFC: Meeting Transcript To-Do List Pipeline
 
 # 1. Purpose
 A brief, one-sentence statement summarizing the goal of this document.
