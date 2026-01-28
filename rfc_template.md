@@ -115,25 +115,25 @@ Did we catch most of the actual action items?
 Measured by: Manually label test transcripts, compare to what the system extracts
 Why it matters: Missing tasks defeats the whole purpose
 
-Precision (Target: >75%)
+### Precision (Target: >75%)
 
 Are the extracted items actually legitimate action items?
 Measured by: Review extracted items and mark false positives
 Why it matters: False positives waste people's time
 
-Token Efficiency (Target: >70% reduction)
+### Token Efficiency (Target: >70% reduction)
 
 How much did we reduce LLM token usage?
 Measured by: Count tokens in filtered segments vs. full transcript
 Why it matters: This directly impacts cost at scale
 
-Assignee Accuracy (Target: >80%)
+### Assignee Accuracy (Target: >80%)
 
 Did we correctly identify who's responsible?
 Measured by: Compare extracted assignee to ground truth
 Why it matters: Wrong assignee = task goes to wrong person
 
-How I'll Test This
+### Testing
 Test Data: Start with the 5 provided transcripts, then create a few more edge cases:
 
 A meeting with no action items (pure brainstorming)
@@ -141,7 +141,7 @@ A meeting with tons of action items (sprint planning)
 A meeting with soft/ambiguous commitments
 A meeting with completed vs. upcoming tasks
 
-Evaluation Process:
+### Evaluation Process:
 
 Manually go through test transcripts and mark all actual action items (ground truth)
 Run the pipeline on these transcripts
@@ -149,13 +149,13 @@ Compare what it found vs. what I marked
 Calculate recall (did we catch them?), precision (were they real?), and F1 score
 Look at failures to understand what went wrong
 
-Iterative Tuning:
+### Iterative Tuning:
 
 If recall is low: Lower the threshold or add more patterns
 If precision is low: Tighten the LLM prompt or raise the threshold
 Track which patterns work best and adjust weights accordingly
 
-What Good Looks Like
+
 A successful extraction on a test meeting would:
 
 Catch at least 9 out of 10 real action items
