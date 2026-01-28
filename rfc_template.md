@@ -1,10 +1,20 @@
 # RFC: Meeting Transcript To-Do List Pipeline
 
 # 1. Purpose
-A brief, one-sentence statement summarizing the goal of this document.
+The purpose of this project is  developing a pipeline that converts raw meeting transcripts into a structured to-do list by identifying and synthesizing actionable items, thus making the process more efficient and insightful for teams.
 
 # 2. Background & Problem Statement
-In your own words, describe the problem we are trying to solve. What is the current state, and what is the desired future state? What are the key challenges you anticipate?
+Teams in remote work often generate long meeting transcripts that are unstructured, making it difficult to extract actionable tasks and commitments. Currently, transcription services capture all content but fail to highlight key tasks, leading to inefficiency and missed action items.
+
+The goal is to automate the extraction of tasks, commitments, and deadlines from transcripts into a structured to-do list. This would reduce manual effort, improve task tracking, and save time.
+
+Core Challenge
+Transform raw meeting transcripts into structured, actionable to-do lists while:
+Minimizing LLM token costs by filtering before processing
+Avoiding hallucinated tasks that weren't actually discussed
+Capturing nuanced commitments (self-assignments, delegations, soft commitments)
+Maintaining context necessary for understanding who should do what by when
+
 
 # 3. Proposed Solution
 This is the core of the RFC. Describe your proposed solution in detail.
