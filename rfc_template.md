@@ -8,12 +8,12 @@ Teams in remote work often generate long meeting transcripts that are unstructur
 
 The goal is to automate the extraction of tasks, commitments, and deadlines from transcripts into a structured to-do list. This would reduce manual effort, improve task tracking, and save time.
 
-Core Challenge
+Core Challenge :
 Transform raw meeting transcripts into structured, actionable to-do lists while:
-Minimizing LLM token costs by filtering before processing
-Avoiding hallucinated tasks that weren't actually discussed
-Capturing nuanced commitments (self-assignments, delegations, soft commitments)
-Maintaining context necessary for understanding who should do what by when
+## Minimizing LLM token costs by filtering before processing
+## Avoiding hallucinated tasks that weren't actually discussed
+## Capturing nuanced commitments (self-assignments, delegations, soft commitments)
+## Maintaining context necessary for understanding who should do what by when
 
 
 # 3. Proposed Solution
