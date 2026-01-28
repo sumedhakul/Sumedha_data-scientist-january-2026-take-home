@@ -10,10 +10,10 @@ The goal is to automate the extraction of tasks, commitments, and deadlines from
 
 Core Challenge :
 Transform raw meeting transcripts into structured, actionable to-do lists while:
-## Minimizing LLM token costs by filtering before processing
-## Avoiding hallucinated tasks that weren't actually discussed
-## Capturing nuanced commitments (self-assignments, delegations, soft commitments)
-## Maintaining context necessary for understanding who should do what by when
+##### Minimizing LLM token costs by filtering before processing
+##### Avoiding hallucinated tasks that weren't actually discussed
+##### Capturing nuanced commitments (self-assignments, delegations, soft commitments)
+##### Maintaining context necessary for understanding who should do what by when
 
 
 # 3. Proposed Solution
