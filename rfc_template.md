@@ -82,26 +82,27 @@ Extract as JSON. For each action item:
 - status: upcoming/completed/cancelled
 
 Only extract real commitments. Return [] if none exist.
+
 The LLM returns structured JSON that I can immediately parse and use.
-How It All Fits Together
+How It All Fits Together : 
 
-Load the transcript (JSON format with segments)
-Run the heuristic scorer on every segment
-Keep only segments scoring above 3.0
-Add context windows around each one
-Remove duplicate windows (if segments are close together)
-Send to LLM in batches
-Parse the JSON responses
-Remove duplicate action items (sometimes the same task is mentioned multiple times)
-Return a clean list of structured action items
+- Load the transcript (JSON format with segments)
+- Run the heuristic scorer on every segment
+- Keep only segments scoring above 3.0
+- Add context windows around each one
+- Remove duplicate windows (if segments are close together)
+- Send to LLM in batches
+- Parse the JSON responses
+- Remove duplicate action items (sometimes the same task is mentioned multiple times)
+- Return a clean list of structured action items
 
-Technical Implementation
+### Technical Implementation
 I'm building this in Python with four main modules:
 
-models.py: Data classes for Segment, ActionItem, and Meeting
-heuristic.py: The scoring logic and pattern matching
-extractor.py: LLM integration (supports OpenAI, Anthropic, or a mock for testing)
-pipeline.py: Orchestrates everything and handles the end-to-end flow
+            - models.py: Data classes for Segment, ActionItem, and Meeting
+            - heuristic.py: The scoring logic and pattern matching
+            - extractor.py: LLM integration (supports OpenAI, Anthropic, or a mock for testing)
+            - pipeline.py: Orchestrates everything and handles the end-to-end flow
 
 The design is modular so I can easily swap out the LLM provider or adjust the heuristic weights based on real-world performance.
 
