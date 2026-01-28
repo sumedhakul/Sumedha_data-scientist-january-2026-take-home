@@ -18,45 +18,48 @@ Transform raw meeting transcripts into structured, actionable to-do lists while:
 
 # 3. Proposed Solution
 My approach uses a two-stage pipeline that combines fast pattern matching with intelligent LLM processing:
-The Big Picture
+
+
 Instead of sending everything to an LLM, I first use a heuristic scorer to identify which parts of the transcript are likely to contain action items. Only those high-probability segments (plus their surrounding context) go to the LLM. This cuts token usage by 70-85% while still capturing the important stuff.
 Raw Transcript → Score Segments → Filter High Scores → Add Context → LLM Extraction → Structured Tasks
 (500 segments)    (pattern matching)  (keep ~20-30%)    (±2 segments)   (GPT/Claude)      (clean JSON)
 
-Stage 1: Smart Filtering with Heuristics
+### Stage 1: Smart Filtering with Heuristics
 I built a scoring system that looks for linguistic patterns that signal action items. Each segment gets scored 0-10 based on what it contains:
 Strong Signals (high points):
 
-Commitment language: "I'll", "I will", "going to" → +3 points
-Delegation: "can you", "please", "you should" → +2.5 points
-Deadlines: "by Friday", "tomorrow", "next week" → +2 points
+- Commitment language: "I'll", "I will", "going to" → +3 points
+- Delegation: "can you", "please", "you should" → +2.5 points
+- Deadlines: "by Friday", "tomorrow", "next week" → +2 points
 
 Supporting Signals:
 
-Action verbs: "send", "create", "schedule", "review" → +1 point
-Task words: "report", "document", "meeting", "ticket" → +1 point
+- Action verbs: "send", "create", "schedule", "review" → +1 point
+- Task words: "report", "document", "meeting", "ticket" → +1 point
 
 Red Flags (penalties):
 
-Past tense: "did", "was", "already done" → -1 point
-Hypotheticals: "maybe", "what if", "perhaps" → -0.5 points
+- Past tense: "did", "was", "already done" → -1 point
+- Hypotheticals: "maybe", "what if", "perhaps" → -0.5 points
 
 Why this works: If someone says "I'll send the report by Friday", that hits commitment language (+3), action verb (+1), task noun (+1), and deadline (+2) = 7 points. That's clearly worth checking. But "That's an interesting idea" scores near zero.
-The Context Window Trick: When I find a high-scoring segment, I grab the 2 segments before and 2 after it (5 total). This preserves the conversation flow. For example:
-Alice: "Can you review the design doc?"     (context)
-Bob: "Sure, I'll do it by tomorrow"        (HIGH SCORE - the key commitment)
-Alice: "Great, send it to the team after"  (context)
+The Context Window Trick: When I find a high-scoring segment, I grab the 2 segments before and 2 after it (5 total). This preserves the conversation flow. 
+For example:
+            - Alice: "Can you review the design doc?"     (context)
+            - Bob: "Sure, I'll do it by tomorrow"        (HIGH SCORE - the key commitment)
+            - Alice: "Great, send it to the team after"  (context)
 This way, the LLM sees the full exchange and knows who's doing what.
-Stage 2: LLM Extraction with Guard Rails
+
+### Stage 2: LLM Extraction with Guard Rails
 For the filtered segments (now only 20-30% of the original), I send them to an LLM with a carefully designed prompt that:
 Tells the LLM what to extract:
 
-Task description (what needs to be done)
-Assignee (who's responsible - and this is the person who commits, not who asks!)
-Deadline (when it's due, if mentioned)
-Confidence level (how sure are we this is real)
-Priority (inferred from urgency language)
-Status (is this upcoming or already done?)
+         - Task description (what needs to be done)
+         - Assignee (who's responsible - and this is the person who commits, not who asks!)
+         - Deadline (when it's due, if mentioned)
+         - Confidence level (how sure are we this is real)
+         - Priority (inferred from urgency language)
+         - Status (is this upcoming or already done?)
 
 Sets strict rules:
 
