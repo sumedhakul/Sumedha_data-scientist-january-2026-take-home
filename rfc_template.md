@@ -214,56 +214,23 @@ Hour 1: Foundation
 
 Hour 2: Integration
 
- Design and test LLM prompt
- Implement extractor (with mock option for testing)
- Build pipeline to connect everything
- Test end-to-end on provided transcripts
+ - Design and test LLM prompt
+ - Implement extractor (with mock option for testing)
+ - Build pipeline to connect everything
+ - Test end-to-end on provided transcripts
 
 Hour 3: Polish
 
  Create demo script showing results
- Add basic visualizations (score distribution, timeline)
- Write this RFC
- Test thoroughly and document
+ - Add basic visualizations (score distribution, timeline)
+ - Write this RFC
+ - Test thoroughly and document
 
 What's Working
 The pipeline successfully:
+- Scores all segments based on linguistic patterns
+- Filters to ~20-30% of segments
+- Extracts structured action items with all required fields
+- Provides confidence levels and priorities
+- Exports to JSON for downstream use
 
-Scores all segments based on linguistic patterns
-Filters to ~20-30% of segments
-Extracts structured action items with all required fields
-Provides confidence levels and priorities
-Exports to JSON for downstream use
-
-What I'd Add With More Time
-Short-term improvements:
-
-More comprehensive unit tests
-Jupyter notebook with richer visualizations
-CLI tool for batch processing
-Support for different transcript formats
-
-Medium-term enhancements:
-
-Fine-tune a lightweight classifier (DistilBERT)
-Better deduplication using semantic similarity
-Confidence calibration against user feedback
-Integration examples for Linear/Jira
-
-Long-term vision:
-
-Real-time processing during live meetings
-Cross-meeting action item tracking
-Voice tone analysis for commitment strength
-Multi-language support
-
-Success Criteria
-For this prototype to be successful:
-
-Processes all 5 test transcripts without errors
-Extracts action items with task, assignee, deadline, confidence
-Achieves >70% token reduction
-Code is clean and documented
-RFC clearly explains the approach
-
-I'm treating this as an MVP that proves the concept and can be iterated on with real user feedback.
