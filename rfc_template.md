@@ -162,40 +162,25 @@ Complete processing in under 30 seconds
 
 # 5. Risks & Open Questions
 
-Major Risks I'm Worried About
 Risk #1: The filter might be too aggressive
 
 What if the heuristic misses action items with unusual phrasing?
 Mitigation: Start with a conservative threshold (2.5-3.0) and tune based on real data. Keep track of false negatives to add patterns.
 
-Risk #2: The LLM might hallucinate tasks
-
-What if it extracts things that sound plausible but weren't actually said?
-Mitigation: Very strict prompt with explicit rules. Use low temperature (0.1). Add confidence scores so users can review low-confidence items.
-
-Risk #3: Context windows might not be enough
+Risk #2: Context windows might not be enough
 
 What if the commitment and details are far apart in the conversation?
 Mitigation: Make window size configurable. Could do ±3 instead of ±2 if needed. Track cases where we miss context.
 
-Risk #4: It might still be too expensive
-
-What if even 20-30% of segments is too many tokens at scale?
-Mitigation: Use cheaper models (GPT-4o-mini instead of GPT-4). Could batch multiple windows in one API call. Add caching for similar segments.
-
-Risk #5: Handling speaker attribution could be tricky
+Risk #3: Handling speaker attribution could be tricky
 
 What if speaker labels are wrong or "you" is ambiguous?
 Mitigation: Trust the labels but mark confidence as low when unclear. Support multiple assignees for group tasks.
 
-Questions I Need to Answer
-
-What's the optimal threshold? I'm starting at 3.0, but this needs testing with real data. Might vary by meeting type (standup vs. planning vs. retrospective).
-How do I handle recurring tasks? If someone says "I'll send the weekly report as usual", should I link it to previous weeks? That's probably v2.
-Should I track completion across meetings? If a task is assigned Monday and marked done Wednesday, should the system connect those? Complex but valuable.
-What about time zones? "By 5 PM" - whose timezone? Probably need meeting metadata.
-How do I collect feedback efficiently? Need a simple way for users to mark "good" or "bad" extractions to improve the system over time.
-When should I switch to ML? The heuristic is interpretable and fast, but eventually a fine-tuned classifier might be better. When is that worth it?
+#### Questions I Need to Answer
+- What about time zones? "By 5 PM" - whose timezone? Probably need meeting metadata.
+- How do I collect feedback efficiently? Need a simple way for users to mark "good" or "bad" extractions to improve the system over time.
+- When should I switch to ML? The heuristic is interpretable and fast, but eventually a fine-tuned classifier might be better. When is that worth it?
 
 
 
@@ -204,13 +189,12 @@ When should I switch to ML? The heuristic is interpretable and fast, but eventua
 
 
 Given the time constraints, here's my realistic plan:
-What I'm Building (Core MVP)
 Hour 1: Foundation
 
- Set up project structure
- Create data models (Segment, ActionItem, Meeting)
- Implement heuristic scorer with pattern matching
- Test scorer on sample segments
+ - Set up project structure
+ - Create data models (Segment, ActionItem, Meeting)
+ - Implement heuristic scorer with pattern matching
+ - Test scorer on sample segments
 
 Hour 2: Integration
 
@@ -221,7 +205,7 @@ Hour 2: Integration
 
 Hour 3: Polish
 
- Create demo script showing results
+ -  Create demo script showing results
  - Add basic visualizations (score distribution, timeline)
  - Write this RFC
  - Test thoroughly and document
